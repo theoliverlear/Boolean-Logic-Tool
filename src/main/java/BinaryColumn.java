@@ -1,16 +1,22 @@
+//=================================-Imports-==================================
 import java.util.ArrayList;
 
 public class BinaryColumn {
+    //============================-Variables-=================================
     int numVariables;
     int positionFromLast;
     ArrayList<Binary> binaryColumn;
+    //===========================-Constructors-===============================
+    public BinaryColumn(ArrayList<Binary> binaryColumn) {
+        this.binaryColumn = binaryColumn;
+    }
     public BinaryColumn(int positionFromLast, int numVariables) {
         this.positionFromLast = positionFromLast;
         this.numVariables = numVariables;
         this.binaryColumn = new ArrayList<>();
         this.fetchTruthTableColumn();
     }
-
+    //=============================-Methods-==================================
     public void fetchTruthTableColumn() {
         ArrayList<Binary> binaryColumn = new ArrayList<>();
         int numCombinations = (int) Math.pow(2, this.numVariables);

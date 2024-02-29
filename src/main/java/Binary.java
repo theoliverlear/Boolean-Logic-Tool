@@ -1,12 +1,16 @@
+//=================================-Imports-==================================
 import java.util.ArrayList;
 
 public class Binary {
+    //============================-Variables-=================================
     public static final Binary ZERO = new Binary("0");
     public static final Binary ONE = new Binary("1");
     String binary;
+    //===========================-Constructors-===============================
     public Binary(String binary) {
         this.binary = binary;
     }
+    //=============================-Methods-==================================
     public Binary and(Binary comparedBinary) {
         System.out.printf("%s and %s%n", this, comparedBinary);
         boolean isBothOne = this.equals(ONE) && comparedBinary.equals(ONE);
