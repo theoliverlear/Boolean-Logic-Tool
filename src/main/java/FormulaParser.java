@@ -8,7 +8,7 @@ public class FormulaParser {
     ArrayList<VariableCluster> variableClusters = new ArrayList<>();
     TruthTable truthTable;
     public FormulaParser(String formula) {
-        this.formula = formula;
+        this.formula = formula.toUpperCase().replaceAll(" ", "");
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
     }
@@ -62,33 +62,6 @@ public class FormulaParser {
             default -> throw new IllegalStateException("Unexpected value: " + binaryFunction.getFunction());
         };
         return formulaOutput;
-    }
-
-    public Variable parsePrimeVariable() {
-        int formulaLength = this.formula.length();
-        if (formulaLength == 1) {
-            return new Variable(this.formula.charAt(0));
-        } else {
-            for (int i = 0; i < formulaLength; i++) {
-                if (this.formula.charAt(i) == '\'') {
-                    return new Variable(this.formula.charAt(i - 1), true);
-                }
-            }
-        }
-        return null;
-    }
-    public Variable parsePrimeVariable(int startIndex) {
-        int formulaLength = this.formula.length();
-        if (formulaLength == 1) {
-            return new Variable(this.formula.charAt(0));
-        } else {
-            for (int i = startIndex; i < formulaLength; i++) {
-                if (this.formula.charAt(i) == '\'') {
-                    return new Variable(this.formula.charAt(i - 1), true);
-                }
-            }
-        }
-        return null;
     }
     public ArrayList<Variable> parseVariables(String formulaSubstring) {
         ArrayList<Variable> variables = new ArrayList<>();
@@ -199,8 +172,11 @@ public class FormulaParser {
                     ArrayList<Binary> binaryDigits = binaryRow.getBinaryRow();
                     char[] binaryDigitsOrderSubset = Arrays.copyOf(binaryDigitsOrder, this.numVariables);
                     char[] finalBinaryVariableOrder = new char[this.numVariables];
-                    for (int i = binaryDigitsOrderSubset.length - 1, j = 0; i >= 0 && j < binaryDigitsOrderSubset.length; i--, j++) {
-                        finalBinaryVariableOrder[j] = binaryDigitsOrderSubset[i];
+//                    for (int i = binaryDigitsOrderSubset.length - 1, j = 0; i >= 0 && j < binaryDigitsOrderSubset.length; i--, j++) {
+//                        finalBinaryVariableOrder[j] = binaryDigitsOrderSubset[i];
+//                    }
+                    for (int i = 0; i < binaryDigitsOrderSubset.length; i++) {
+                        finalBinaryVariableOrder[i] = binaryDigitsOrderSubset[i];
                     }
                     ArrayList<Binary> binaryClusterDigits = new ArrayList<>();
                     for (int i = 0; i < variableSymbols.size(); i++) {
@@ -223,6 +199,9 @@ public class FormulaParser {
                     }
                     BinaryRow binaryClusterRow = new BinaryRow(binaryClusterDigits);
                     Binary binaryClusterOutput = binaryClusterRow.rowAnd();
+                    if (variableCluster.getIsPrime()) {
+                        binaryClusterOutput = binaryClusterOutput.not();
+                    }
                     variableClusterBinaryDigits.add(binaryClusterOutput);
                 }
             }
@@ -246,7 +225,7 @@ public class FormulaParser {
 //        Binary comparedBinaryDigit = Binary.ZERO;
 //        System.out.println(formulaParser.getFormulaBinary(binaryDigit, comparedBinaryDigit));
 //        FormulaParser formulaParser = new FormulaParser("(A'C+B)'+(CB')'+A'B'C'");
-        FormulaParser formulaParser = new FormulaParser("A'+BC");
+        FormulaParser formulaParser = new FormulaParser("AB+C");
         formulaParser.findCluster();
         System.out.println(formulaParser);
         System.out.println(formulaParser.getFullFormulaBinary());
