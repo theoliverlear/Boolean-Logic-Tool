@@ -10,7 +10,6 @@ public class Variable {
         this.binaryValue = binaryValue;
     }
     public Variable(char variableSymbol, boolean isPrime) {
-        System.out.println("Variable: " + variableSymbol + " is prime: " + isPrime);
         this.variableSymbol = variableSymbol;
         this.isPrime = isPrime;
     }
@@ -21,7 +20,7 @@ public class Variable {
     }
     public Binary getBinaryFromInput() {
         if (this.isPrime) {
-            if (this.binaryValue == Binary.ONE) {
+            if (this.binaryValue.equals(Binary.ONE)) {
                 return Binary.ZERO;
             } else {
                 return Binary.ONE;
@@ -32,13 +31,13 @@ public class Variable {
     }
     public Binary getBinaryFromInput(Binary inputDigit) {
         if (this.isPrime) {
-            if (inputDigit == Binary.ONE) {
+            if (inputDigit.equals(Binary.ONE)) {
                 return Binary.ZERO;
             } else {
                 return Binary.ONE;
             }
         } else {
-            return this.binaryValue;
+            return inputDigit;
         }
     }
     public char getVariableSymbol() {
@@ -52,6 +51,12 @@ public class Variable {
     }
     public void setBinaryValue(Binary binaryValue) {
         this.binaryValue = binaryValue;
+    }
+    public boolean getIsPrime() {
+        return this.isPrime;
+    }
+    public void setIsPrime(boolean isPrime) {
+        this.isPrime = isPrime;
     }
     @Override
     public String toString() {

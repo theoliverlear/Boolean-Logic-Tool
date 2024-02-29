@@ -33,7 +33,7 @@ public class VariableCluster {
     public Binary variableClusterAnd() {
         Binary result = Binary.ONE;
         for (Variable variable : this.variableCluster) {
-            if (variable.getBinaryFromInput() == Binary.ZERO) {
+            if (variable.getBinaryFromInput().equals(Binary.ZERO)) {
                 result = Binary.ZERO;
             }
         }
@@ -42,7 +42,7 @@ public class VariableCluster {
     public Binary variableClusterOr() {
         Binary result = Binary.ZERO;
         for (Variable variable : this.variableCluster) {
-            if (variable.getBinaryFromInput() == Binary.ONE) {
+            if (variable.getBinaryFromInput().equals(Binary.ONE)) {
                 result = Binary.ONE;
             }
         }
@@ -73,5 +73,9 @@ public class VariableCluster {
             }
         }
         return variableClusterString;
+    }
+
+    public boolean getIsPrime() {
+        return this.isPrime;
     }
 }
