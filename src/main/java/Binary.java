@@ -99,6 +99,17 @@ public class Binary {
             return ONE;
         }
     }
+    public Binary xor(Binary comparedBinary) {
+        boolean isSame = this.equals(comparedBinary);
+        if (isSame) {
+            return ZERO;
+        } else {
+            return ONE;
+        }
+    }
+    public Binary xnor(Binary comparedBinary) {
+        return this.xor(comparedBinary).not();
+    }
     @Override
     public String toString() {
         return this.binary;
