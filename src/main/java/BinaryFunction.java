@@ -1,14 +1,17 @@
 public class BinaryFunction {
+    //============================-Variables-=================================
     public static final BinaryFunction AND = new BinaryFunction("AND");
     public static final BinaryFunction OR = new BinaryFunction("OR");
     public static final BinaryFunction NOT = new BinaryFunction("NOT");
     String function;
+    //===========================-Constructors-===============================
     public BinaryFunction() {
         this.function = "";
     }
     public BinaryFunction(String function) {
         this.function = function;
     }
+    //=============================-Methods-==================================
     public BinaryFunction determineFunction(BinaryCluster binaryCluster) {
         if (binaryCluster.clusterAnd() == Binary.ONE) {
             return AND;
