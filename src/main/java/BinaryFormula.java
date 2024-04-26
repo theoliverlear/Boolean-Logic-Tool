@@ -1,29 +1,30 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+//=================================-Imports-==================================
+import java.util.*;
 
-
-public class FormulaParser {
+public class BinaryFormula {
+    //============================-Variables-=================================
     String formula;
     int numVariables;
     boolean isPrime = false;
-    ArrayList<FormulaParser> subFormulas = new ArrayList<>();
+    ArrayList<BinaryFormula> subFormulas = new ArrayList<>();
     ArrayList<VariableCluster> variableClusters = new ArrayList<>();
     TruthTable truthTable;
-    public FormulaParser(String formula) {
+    //===========================-Constructors-===============================
+    public BinaryFormula(String formula) {
         this.formula = formula.toUpperCase().replaceAll(" ", "");
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
     }
-    public FormulaParser(String formula, boolean isPrime) {
+    public BinaryFormula(String formula, boolean isPrime) {
         this.formula = formula.toUpperCase().replaceAll(" ", "");
         this.isPrime = isPrime;
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
     }
+    //=============================-Methods-==================================
     public int formulaVariableCount() {
         ArrayList<String> variableSymbols = new ArrayList<>();
+        char[] symbols = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
         String[] formulaOrArray = this.formula.split("\\+");
         for (String variableSymbol : formulaOrArray) {
             variableSymbol = variableSymbol.replace("(", "").replace(")", "").replace("'", "");
@@ -33,7 +34,16 @@ public class FormulaParser {
                 }
             }
         }
-        return variableSymbols.size();
+        variableSymbols.sort(String::compareToIgnoreCase);
+        ArrayList<String> variablesToAdd = new ArrayList<>();
+        for (int i = 0; i < variableSymbols.size(); i++) {
+            if (!variableSymbols.get(i).equals(String.valueOf(symbols[i]))) {
+                variablesToAdd.add(String.valueOf(symbols[i]));
+            }
+        }
+        variableSymbols.addAll(variablesToAdd);
+        HashSet<String> variableSymbolsSet = new HashSet<>(variableSymbols);
+        return variableSymbolsSet.size();
     }
     public ArrayList<Variable> parseVariables(String formulaSubstring) {
         ArrayList<Variable> variables = new ArrayList<>();
@@ -53,10 +63,7 @@ public class FormulaParser {
         }
         return variables;
     }
-    public ArrayList<Variable> parsePrimeClusters(ArrayList<Variable> variables) {
-        return null;
-    }
-    public void findCluster() {
+    public void findVariableClusters() {
         // Split items in the list are OR'd together
         String[] formulaOrArray = this.formula.split("\\+");
         ArrayList<String> variableSymbols = new ArrayList<>(Arrays.asList(formulaOrArray));
@@ -93,10 +100,10 @@ public class FormulaParser {
             for (Map.Entry<String, Boolean> entry : innerFormulaMap.entrySet()) {
                 String innerFormulaString = entry.getKey();
                 boolean isPrime = entry.getValue();
-                this.subFormulas.add(new FormulaParser(innerFormulaString, isPrime));
+                this.subFormulas.add(new BinaryFormula(innerFormulaString, isPrime));
             }
         }
-        this.subFormulas.forEach(FormulaParser::findCluster);
+        this.subFormulas.forEach(BinaryFormula::findVariableClusters);
         ArrayList<ArrayList<Variable>> splitVariableClusters = new ArrayList<>();
         for (String variableStringCluster : variableSymbols) {
             splitVariableClusters.add(this.parseVariables(variableStringCluster));
@@ -142,7 +149,7 @@ public class FormulaParser {
     public ArrayList<Binary> getFullFormulaBinary() {
         ArrayList<BinaryRow> binaryRows = this.truthTable.getTruthTableRows();
         ArrayList<Binary> finalBinaryDigits = new ArrayList<>();
-        ArrayList<FormulaParser> formulas = new ArrayList<>();
+        ArrayList<BinaryFormula> formulas = new ArrayList<>();
         formulas.add(this);
         formulas.addAll(this.subFormulas);
 
@@ -159,7 +166,7 @@ public class FormulaParser {
             ArrayList<Binary> formulasOutputDigits = new ArrayList<>();
             // Loop through each formula. This will be the OR'd with the
             // output of other formulas.
-            for (FormulaParser formula : formulas) { // Look for final output of each formula
+            for (BinaryFormula formula : formulas) { // Look for final output of each formula
                 ArrayList<VariableCluster> clustersInFormula = formula.variableClusters;
                 ArrayList<Binary> formulaClusters = new ArrayList<>();
                 // For each cluster in the formula, we will get the output
@@ -219,14 +226,19 @@ public class FormulaParser {
     }
     @Override
     public String toString() {
-
         return this.formula;
     }
     public static void main(String[] args) {
-        FormulaParser formulaParser = new FormulaParser("AB+CD");
-        formulaParser.findCluster();
-        System.out.println(formulaParser);
-        System.out.println(formulaParser.getFullFormulaBinary());
+        BinaryFormula binaryFormula = new BinaryFormula("D'+B'C+AC");
+        binaryFormula.findVariableClusters();
+        System.out.println(binaryFormula);
+        System.out.println(binaryFormula.getFullFormulaBinary());
+        System.out.println("-".repeat(10));
+        BinaryFormula binaryFormula2 = new BinaryFormula("D'+AC");
+        binaryFormula2.findVariableClusters();
+        System.out.println(binaryFormula2);
+        System.out.println(binaryFormula2.getFullFormulaBinary());
+        System.out.println(binaryFormula.getFullFormulaBinary().equals(binaryFormula2.getFullFormulaBinary()));
 
     }
 }
