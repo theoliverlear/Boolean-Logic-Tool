@@ -13,7 +13,6 @@ public class TruthTable {
         this.truthTableColumns = new ArrayList<>();
         this.truthTableRows = new ArrayList<>();
         this.generateDefaultTruthTable();
-        this.generateTruthTableRows();
     }
     public TruthTable(int numVariables, BinaryColumn functionColumn) {
         this.numVariables = numVariables;
@@ -21,10 +20,13 @@ public class TruthTable {
         this.truthTableColumns = new ArrayList<>();
         this.truthTableRows = new ArrayList<>();
         this.generateDefaultTruthTable();
-        this.generateTruthTableRows();
     }
     //=============================-Methods-==================================
     public void generateDefaultTruthTable() {
+        this.generateTruthTableColumns();
+        this.generateTruthTableRows();
+    }
+    public void generateTruthTableColumns() {
         for (int i = this.numVariables - 1; i >= 0; i--) {
             BinaryColumn binaryColumn = new BinaryColumn(i, this.numVariables);
             this.truthTableColumns.add(binaryColumn);
