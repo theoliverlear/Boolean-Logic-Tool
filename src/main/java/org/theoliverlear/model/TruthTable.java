@@ -1,11 +1,18 @@
+package org.theoliverlear.model;
 //=================================-Imports-==================================
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 public class TruthTable {
     //============================-Variables-=================================
     int numVariables;
-    ArrayList<BinaryColumn> truthTableColumns;
-    ArrayList<BinaryRow> truthTableRows;
+    List<BinaryColumn> truthTableColumns;
+    List<BinaryRow> truthTableRows;
     BinaryColumn functionColumn;
     //===========================-Constructors-===============================
     public TruthTable(int numVariables) {
@@ -55,7 +62,7 @@ public class TruthTable {
             }
         } else {
             for (int i = 0; i < this.truthTableColumns.get(0).size(); i++) {
-                ArrayList<BinaryColumn> tableColumns = this.truthTableColumns;
+                List<BinaryColumn> tableColumns = this.truthTableColumns;
                 for (int j = 0; j < tableColumns.size(); j++) {
                     BinaryColumn binaryColumn = tableColumns.get(j);
                     tableString += binaryColumn.getBinaryColumnDigit(i).getBinary();
@@ -66,18 +73,6 @@ public class TruthTable {
         return tableString;
     }
 
-    public ArrayList<BinaryRow> getTruthTableRows() {
-        return this.truthTableRows;
-    }
-    public void setTruthTableRows(ArrayList<BinaryRow> truthTableRows) {
-        this.truthTableRows = truthTableRows;
-    }
-    public ArrayList<BinaryColumn> getTruthTableColumns() {
-        return this.truthTableColumns;
-    }
-    public void setTruthTableColumns(ArrayList<BinaryColumn> truthTableColumns) {
-        this.truthTableColumns = truthTableColumns;
-    }
     public static void main(String[] args) {
         TruthTable truthTable = new TruthTable(4);
         System.out.println(truthTable);
