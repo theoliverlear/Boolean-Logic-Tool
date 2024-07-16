@@ -1,27 +1,33 @@
+package org.theoliverlear.model;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class VariableCluster {
     boolean isPrime = false;
-    ArrayList<Variable> variableCluster = new ArrayList<>();
+    List<Variable> variableCluster;
     public VariableCluster(Variable variable) {
+        this.variableCluster = new ArrayList<>();
         this.variableCluster.add(variable);
     }
     public VariableCluster(Variable variable, boolean isPrime) {
+        this.variableCluster = new ArrayList<>();
         this.variableCluster.add(variable);
         this.isPrime = isPrime;
     }
-    public VariableCluster(ArrayList<Variable> variableCluster) {
+    public VariableCluster(List<Variable> variableCluster) {
         this.variableCluster = variableCluster;
     }
-    public VariableCluster(ArrayList<Variable> variableCluster, boolean isPrime) {
+    public VariableCluster(List<Variable> variableCluster, boolean isPrime) {
         this.variableCluster = variableCluster;
         this.isPrime = isPrime;
     }
     public VariableCluster(Variable... variables) {
+        this.variableCluster = new ArrayList<>();
         Collections.addAll(this.variableCluster, variables);
     }
-    public ArrayList<Variable> getVariableCluster() {
+    public List<Variable> getVariableCluster() {
         return this.variableCluster;
     }
     public void addVariable(Variable variable) {
@@ -51,8 +57,8 @@ public class VariableCluster {
     public int size() {
         return this.variableCluster.size();
     }
-    public ArrayList<Character> getVariableSymbols() {
-        ArrayList<Character> variableSymbols = new ArrayList<>();
+    public List<Character> getVariableSymbols() {
+        List<Character> variableSymbols = new ArrayList<>();
         for (Variable variable : this.variableCluster) {
             variableSymbols.add(variable.getVariableSymbol());
         }
