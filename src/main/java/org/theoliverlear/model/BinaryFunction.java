@@ -1,3 +1,5 @@
+package org.theoliverlear.model;
+
 public class BinaryFunction {
     //============================-Variables-=================================
     public static final BinaryFunction AND = new BinaryFunction("AND");
