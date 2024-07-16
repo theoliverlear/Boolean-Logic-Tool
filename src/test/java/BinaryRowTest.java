@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.theoliverlear.model.Binary;
+import org.theoliverlear.model.BinaryRow;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
