@@ -1,18 +1,24 @@
+package org.theoliverlear.model;
 //=================================-Imports-==================================
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+@Getter
 public class BinaryRow {
     //============================-Variables-=================================
-    ArrayList<Binary> binaryRow;
+    List<Binary> binaryRow;
     //===========================-Constructors-===============================
     public BinaryRow() {
         this.binaryRow = new ArrayList<>();
     }
-    //=============================-Methods-==================================
-    public BinaryRow(ArrayList<Binary> binaryRow) {
+    public BinaryRow(List<Binary> binaryRow) {
         this.binaryRow = binaryRow;
     }
+    //=============================-Methods-==================================
+
     public BinaryRow(Binary... binaries) {
         this.binaryRow = new ArrayList<>();
         Collections.addAll(this.binaryRow, binaries);
@@ -38,9 +44,6 @@ public class BinaryRow {
     }
     public int size() {
         return this.binaryRow.size();
-    }
-    public ArrayList<Binary> getBinaryRow() {
-        return this.binaryRow;
     }
     @Override
     public String toString() {
