@@ -1,13 +1,15 @@
+package org.theoliverlear.model;
 //=================================-Imports-==================================
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class BinaryCluster {
-    ArrayList<Binary> binaryCluster;
+    List<Binary> binaryCluster;
     public BinaryCluster() {
         this.binaryCluster = new ArrayList<>();
     }
-    public BinaryCluster(ArrayList<Binary> binaryCluster) {
+    public BinaryCluster(List<Binary> binaryCluster) {
         this.binaryCluster = binaryCluster;
     }
     public BinaryCluster(Binary... binaries) {
