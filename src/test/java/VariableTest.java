@@ -1,5 +1,6 @@
-import org.aspectj.weaver.ast.Var;
 import org.junit.jupiter.api.Test;
+import org.theoliverlear.model.Binary;
+import org.theoliverlear.model.Variable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,8 +25,8 @@ public class VariableTest {
     }
     @Test
     public void testVariableIsPrime() {
-        assertFalse(this.testVariable.getIsPrime());
-        assertTrue(this.testVariablePrime.getIsPrime());
+        assertFalse(this.testVariable.isPrime());
+        assertTrue(this.testVariablePrime.isPrime());
     }
 
 }
