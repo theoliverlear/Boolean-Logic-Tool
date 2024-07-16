@@ -1,13 +1,20 @@
+package org.theoliverlear.model;
 //=================================-Imports-==================================
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 public class BinaryColumn {
     //============================-Variables-=================================
     int numVariables;
     int positionFromLast;
-    ArrayList<Binary> binaryColumn;
+    List<Binary> binaryColumn;
     //===========================-Constructors-===============================
-    public BinaryColumn(ArrayList<Binary> binaryColumn) {
+    public BinaryColumn(List<Binary> binaryColumn) {
         this.binaryColumn = binaryColumn;
     }
     public BinaryColumn(int positionFromLast, int numVariables) {
@@ -18,7 +25,7 @@ public class BinaryColumn {
     }
     //=============================-Methods-==================================
     public void fetchTruthTableColumn() {
-        ArrayList<Binary> binaryColumn = new ArrayList<>();
+        List<Binary> binaryColumn = new ArrayList<>();
         int numCombinations = (int) Math.pow(2, this.numVariables);
         int numChangesAmount = (int) Math.pow(2, this.positionFromLast);
         int rowPrintCount = 0;
@@ -52,11 +59,5 @@ public class BinaryColumn {
             binaryColumnString += binaryDigit.getBinary();
         }
         return binaryColumnString;
-    }
-    public ArrayList<Binary> getBinaryColumn() {
-        return this.binaryColumn;
-    }
-    public void setBinaryColumn(ArrayList<Binary> binaryColumn) {
-        this.binaryColumn = binaryColumn;
     }
 }
