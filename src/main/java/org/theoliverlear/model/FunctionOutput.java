@@ -1,22 +1,30 @@
-import java.util.ArrayList;
+package org.theoliverlear.model;
 
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
 public class FunctionOutput {
-    ArrayList<Binary> functionOutput = new ArrayList<>();
+    List<Binary> functionOutput;
     TruthTable truthTable;
     VariableCluster variableCluster;
     public FunctionOutput(VariableCluster variableCluster) {
+        this.functionOutput = new ArrayList<>();
         this.truthTable = new TruthTable(variableCluster.getVariableCluster().size());
         this.variableCluster = variableCluster;
         this.fetchFunctionOutput();
     }
     public FunctionOutput(BinaryRow binaryRow, VariableCluster variableCluster) {
+        this.functionOutput = new ArrayList<>();
         this.truthTable = new TruthTable(variableCluster.getVariableCluster().size());
         this.variableCluster = variableCluster;
         this.fetchFunctionOutput();
     }
     public Binary getFunctionOutput(BinaryRow binaryRow) {
-        ArrayList<Variable> cluster = this.variableCluster.getVariableCluster();
-        ArrayList<Binary> binaryRowList = new ArrayList<>();
+        List<Variable> cluster = this.variableCluster.getVariableCluster();
+        List<Binary> binaryRowList = new ArrayList<>();
         for (int i = 0; i < cluster.size(); i++) {
             Variable variable = cluster.get(i);
             Binary binaryRowDigit = binaryRow.getBinaryRowDigit(i);
@@ -26,10 +34,10 @@ public class FunctionOutput {
         return binaryRowOutput.rowAnd();
     }
     public void fetchFunctionOutput() {
-        ArrayList<Binary> binaryVariableRowOutput = new ArrayList<>();
+        List<Binary> binaryVariableRowOutput = new ArrayList<>();
         for (BinaryRow binaryRow : this.truthTable.getTruthTableRows()) {
-            ArrayList<Variable> cluster = this.variableCluster.getVariableCluster();
-            ArrayList<Binary> binaryRowList = new ArrayList<>();
+            List<Variable> cluster = this.variableCluster.getVariableCluster();
+            List<Binary> binaryRowList = new ArrayList<>();
             for (int i = 0; i < cluster.size(); i++) {
                 Variable variable = cluster.get(i);
                 Binary binaryRowDigit = binaryRow.getBinaryRowDigit(i);
@@ -39,11 +47,5 @@ public class FunctionOutput {
             binaryVariableRowOutput.add(binaryRowOutput.rowAnd());
         }
         this.functionOutput = binaryVariableRowOutput;
-    }
-    public ArrayList<Binary> getFunctionOutput() {
-        return this.functionOutput;
-    }
-    public void setFunctionOutput(ArrayList<Binary> functionOutput) {
-        this.functionOutput = functionOutput;
     }
 }
