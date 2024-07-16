@@ -1,3 +1,10 @@
+package org.theoliverlear.model;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Variable {
     char variableSymbol;
     Binary binaryValue = Binary.ZERO;
@@ -39,24 +46,6 @@ public class Variable {
         } else {
             return inputDigit;
         }
-    }
-    public char getVariableSymbol() {
-        return this.variableSymbol;
-    }
-    public Binary getBinaryValue() {
-        return this.binaryValue;
-    }
-    public void setVariableSymbol(char variableSymbol) {
-        this.variableSymbol = variableSymbol;
-    }
-    public void setBinaryValue(Binary binaryValue) {
-        this.binaryValue = binaryValue;
-    }
-    public boolean getIsPrime() {
-        return this.isPrime;
-    }
-    public void setIsPrime(boolean isPrime) {
-        this.isPrime = isPrime;
     }
     @Override
     public String toString() {
