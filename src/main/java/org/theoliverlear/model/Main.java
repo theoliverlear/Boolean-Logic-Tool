@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+package org.theoliverlear.model;
 
+import java.util.ArrayList;
+@Deprecated
 public class Main {
     public static ArrayList<String> getTruthTableColumn(int positionFromLast, int numVariables) {
         ArrayList<String> binaryColumn = new ArrayList<>();
