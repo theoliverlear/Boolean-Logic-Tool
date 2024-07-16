@@ -1,6 +1,11 @@
+package org.theoliverlear.model;
 //=================================-Imports-==================================
-import java.util.ArrayList;
+import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
 public class Binary {
     //============================-Variables-=================================
     public static final Binary ZERO = new Binary("0");
@@ -31,7 +36,7 @@ public class Binary {
         }
         return ONE;
     }
-    public Binary and(ArrayList<Binary> comparedBinaries) {
+    public Binary and(List<Binary> comparedBinaries) {
         if (this.equals(ZERO)) {
             return ZERO;
         }
@@ -120,11 +125,5 @@ public class Binary {
             return this.binary.equals(comparedBinary.getBinary());
         }
         return false;
-    }
-    public String getBinary() {
-        return this.binary;
-    }
-    public void setBinary(String binary) {
-        this.binary = binary;
     }
 }
