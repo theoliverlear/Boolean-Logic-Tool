@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.theoliverlear.model.Binary;
 
 import static org.junit.jupiter.api.Assertions.*;
 
