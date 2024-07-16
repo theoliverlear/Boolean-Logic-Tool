@@ -1,3 +1,4 @@
+package org.theoliverlear.model;
 //=================================-Imports-==================================
 import java.util.*;
 
@@ -6,24 +7,31 @@ public class BinaryFormula {
     String formula;
     int numVariables;
     boolean isPrime = false;
-    ArrayList<BinaryFormula> subFormulas = new ArrayList<>();
-    ArrayList<VariableCluster> variableClusters = new ArrayList<>();
+    List<BinaryFormula> subFormulas;
+    List<VariableCluster> variableClusters;
     TruthTable truthTable;
     //===========================-Constructors-===============================
     public BinaryFormula(String formula) {
-        this.formula = formula.toUpperCase().replaceAll(" ", "");
+        this.subFormulas = new ArrayList<>();
+        this.variableClusters = new ArrayList<>();
+        this.formula = formatFormula(formula);
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
     }
     public BinaryFormula(String formula, boolean isPrime) {
-        this.formula = formula.toUpperCase().replaceAll(" ", "");
+        this.variableClusters = new ArrayList<>();
+        this.subFormulas = new ArrayList<>();
+        this.formula = formatFormula(formula);
         this.isPrime = isPrime;
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
     }
     //=============================-Methods-==================================
+    public static String formatFormula(String formula) {
+        return formula.toUpperCase().replaceAll(" ", "");
+    }
     public int formulaVariableCount() {
-        ArrayList<String> variableSymbols = new ArrayList<>();
+        List<String> variableSymbols = new ArrayList<>();
         char[] symbols = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
         String[] formulaOrArray = this.formula.split("\\+");
         for (String variableSymbol : formulaOrArray) {
@@ -35,18 +43,18 @@ public class BinaryFormula {
             }
         }
         variableSymbols.sort(String::compareToIgnoreCase);
-        ArrayList<String> variablesToAdd = new ArrayList<>();
+        List<String> variablesToAdd = new ArrayList<>();
         for (int i = 0; i < variableSymbols.size(); i++) {
             if (!variableSymbols.get(i).equals(String.valueOf(symbols[i]))) {
                 variablesToAdd.add(String.valueOf(symbols[i]));
             }
         }
         variableSymbols.addAll(variablesToAdd);
-        HashSet<String> variableSymbolsSet = new HashSet<>(variableSymbols);
+        Set<String> variableSymbolsSet = new HashSet<>(variableSymbols);
         return variableSymbolsSet.size();
     }
-    public ArrayList<Variable> parseVariables(String formulaSubstring) {
-        ArrayList<Variable> variables = new ArrayList<>();
+    public List<Variable> parseVariables(String formulaSubstring) {
+        List<Variable> variables = new ArrayList<>();
         int formulaLength = formulaSubstring.length();
         String[] primeVariableSplitArray = formulaSubstring.split("'");
         System.out.println(Arrays.toString(primeVariableSplitArray));
@@ -66,9 +74,9 @@ public class BinaryFormula {
     public void findVariableClusters() {
         // Split items in the list are OR'd together
         String[] formulaOrArray = this.formula.split("\\+");
-        ArrayList<String> variableSymbols = new ArrayList<>(Arrays.asList(formulaOrArray));
-        ArrayList<String> innerFormulaStrings = new ArrayList<>();
-        ArrayList<HashMap<String, Boolean>> innerFormulaWithPrimeMap = new ArrayList<>();
+        List<String> variableSymbols = new ArrayList<>(Arrays.asList(formulaOrArray));
+        List<String> innerFormulaStrings = new ArrayList<>();
+        List<Map<String, Boolean>> innerFormulaWithPrimeMap = new ArrayList<>();
         for (int i = 0; i < variableSymbols.size(); i++) {
             String variableSymbol = variableSymbols.get(i);
             if (variableSymbol.contains("(") && !variableSymbol.contains(")")) {
@@ -77,7 +85,7 @@ public class BinaryFormula {
                     if (innerVariableSymbol.contains(")'")) {
                         String withoutPrimeBrackets = variableSymbol.replace("(", "")
                                 + "+" + innerVariableSymbol.replace(")'", "");
-                        HashMap<String, Boolean> innerFormulaMap = new HashMap<>();
+                        Map<String, Boolean> innerFormulaMap = new HashMap<>();
                         innerFormulaMap.put(withoutPrimeBrackets, true);
                         innerFormulaWithPrimeMap.add(innerFormulaMap);
                         variableSymbols.remove(j);
@@ -86,7 +94,7 @@ public class BinaryFormula {
                     } else if (innerVariableSymbol.contains(")")) {
                         String withoutPrimeBrackets = variableSymbol.replace("(", "")
                                 + "+" + innerVariableSymbol.replace(")", "");
-                        HashMap<String, Boolean> innerFormulaMap = new HashMap<>();
+                        Map<String, Boolean> innerFormulaMap = new HashMap<>();
                         innerFormulaMap.put(withoutPrimeBrackets, false);
                         innerFormulaWithPrimeMap.add(innerFormulaMap);
                         variableSymbols.remove(j);
@@ -96,7 +104,7 @@ public class BinaryFormula {
                 }
             }
         }
-        for (HashMap<String, Boolean> innerFormulaMap : innerFormulaWithPrimeMap) {
+        for (Map<String, Boolean> innerFormulaMap : innerFormulaWithPrimeMap) {
             for (Map.Entry<String, Boolean> entry : innerFormulaMap.entrySet()) {
                 String innerFormulaString = entry.getKey();
                 boolean isPrime = entry.getValue();
@@ -104,13 +112,13 @@ public class BinaryFormula {
             }
         }
         this.subFormulas.forEach(BinaryFormula::findVariableClusters);
-        ArrayList<ArrayList<Variable>> splitVariableClusters = new ArrayList<>();
+        List<List<Variable>> splitVariableClusters = new ArrayList<>();
         for (String variableStringCluster : variableSymbols) {
             splitVariableClusters.add(this.parseVariables(variableStringCluster));
         }
         System.out.println(splitVariableClusters);
-        ArrayList<VariableCluster> variableClusters = new ArrayList<>();
-        for (ArrayList<Variable> variableCluster : splitVariableClusters) {
+        List<VariableCluster> variableClusters = new ArrayList<>();
+        for (List<Variable> variableCluster : splitVariableClusters) {
             boolean isPrime = false;
             int clusterPrimeOpenBracketIndex = -1;
             int clusterPrimeCloseBracketIndex = -1;
@@ -132,7 +140,7 @@ public class BinaryFormula {
                 }
             }
             if (isPrime) {
-                ArrayList<Variable> primeCluster = new ArrayList<>();
+                List<Variable> primeCluster = new ArrayList<>();
                 for (int i = clusterPrimeOpenBracketIndex + 1; i < clusterPrimeCloseBracketIndex; i++) {
                     primeCluster.add(variableCluster.get(i));
                 }
@@ -146,10 +154,10 @@ public class BinaryFormula {
         }
         this.variableClusters = variableClusters;
     }
-    public ArrayList<Binary> getFullFormulaBinary() {
-        ArrayList<BinaryRow> binaryRows = this.truthTable.getTruthTableRows();
-        ArrayList<Binary> finalBinaryDigits = new ArrayList<>();
-        ArrayList<BinaryFormula> formulas = new ArrayList<>();
+    public List<Binary> getFullFormulaBinary() {
+        List<BinaryRow> binaryRows = this.truthTable.getTruthTableRows();
+        List<Binary> finalBinaryDigits = new ArrayList<>();
+        List<BinaryFormula> formulas = new ArrayList<>();
         formulas.add(this);
         formulas.addAll(this.subFormulas);
 
@@ -163,25 +171,25 @@ public class BinaryFormula {
         // Loop through each row. This will be the final formula combination
         // output.
         for (BinaryRow binaryRow : binaryRows) { // Look for final output of each row
-            ArrayList<Binary> formulasOutputDigits = new ArrayList<>();
+            List<Binary> formulasOutputDigits = new ArrayList<>();
             // Loop through each formula. This will be the OR'd with the
             // output of other formulas.
             for (BinaryFormula formula : formulas) { // Look for final output of each formula
-                ArrayList<VariableCluster> clustersInFormula = formula.variableClusters;
-                ArrayList<Binary> formulaClusters = new ArrayList<>();
+                List<VariableCluster> clustersInFormula = formula.variableClusters;
+                List<Binary> formulaClusters = new ArrayList<>();
                 // For each cluster in the formula, we will get the output
                 // of the cluster and then AND its contents.
                 for (VariableCluster variableCluster : clustersInFormula) { // Look for final output of each cluster
-                    ArrayList<Character> variableSymbols = variableCluster.getVariableSymbols();
+                    List<Character> variableSymbols = variableCluster.getVariableSymbols();
                     char[] binaryDigitsOrder = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-                    ArrayList<Binary> binaryDigits = binaryRow.getBinaryRow();
+                    List<Binary> binaryDigits = binaryRow.getBinaryRow();
                     char[] binaryDigitsOrderSubset = Arrays.copyOf(binaryDigitsOrder, this.numVariables);
-                    ArrayList<Binary> binaryClusterDigits = new ArrayList<>();
+                    List<Binary> binaryClusterDigits = new ArrayList<>();
                     for (char variableSymbol : variableSymbols) {
                         // Loop through each variable in the cluster and get
                         // the binary digit from the input. We will then AND
                         // the binary digits together.
-                        ArrayList<Variable> variableInsideCluster = variableCluster.getVariableCluster();
+                        List<Variable> variableInsideCluster = variableCluster.getVariableCluster();
                         for (Variable variable : variableInsideCluster) { // Look for final output of each variable
                             if (variable.getVariableSymbol() == variableSymbol) {
                                 int variableIndex;
