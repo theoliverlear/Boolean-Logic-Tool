@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.theoliverlear.model.Variable;
+import org.theoliverlear.model.VariableCluster;
 
 import java.util.ArrayList;
 
