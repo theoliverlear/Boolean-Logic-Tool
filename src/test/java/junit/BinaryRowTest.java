@@ -1,3 +1,5 @@
+package junit;
+
 import org.junit.jupiter.api.Test;
 import org.theoliverlear.model.Binary;
 import org.theoliverlear.model.BinaryRow;
