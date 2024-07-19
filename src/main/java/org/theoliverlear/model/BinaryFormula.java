@@ -1,7 +1,10 @@
 package org.theoliverlear.model;
 //=================================-Imports-==================================
+import lombok.Getter;
+
 import java.util.*;
 
+@Getter
 public class BinaryFormula {
     //============================-Variables-=================================
     String formula;
@@ -17,6 +20,7 @@ public class BinaryFormula {
         this.formula = formatFormula(formula);
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
+        this.findVariableClusters();
     }
     public BinaryFormula(String formula, boolean isPrime) {
         this.variableClusters = new ArrayList<>();
@@ -25,6 +29,7 @@ public class BinaryFormula {
         this.isPrime = isPrime;
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
+        this.findVariableClusters();
     }
     //=============================-Methods-==================================
     public static String formatFormula(String formula) {
