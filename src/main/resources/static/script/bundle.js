@@ -23,9 +23,21 @@ eval("\n\n//# sourceURL=webpack://boolean-logic-tool/./src/main/resources/static
 /*!********************************************************!*\
   !*** ./src/main/resources/static/script/homeScript.ts ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("/* provided dependency */ var $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\nvar functionInput = $(\"#function-input\");\nvar submitButton = $(\"#submit-button\");\nvar truthTableDiv = $(\"#truth-table-div\");\nfunction sendFormulaToServer() {\n  console.log('functionInput: ', functionInput.val());\n  fetch('/formula', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify({\n      formula: functionInput.val()\n    })\n  }).then(function (response) {\n    return response.json();\n  }).then(function (responseJson) {\n    console.log(responseJson);\n    var truthTable = responseJson.truthTable;\n    truthTableDiv.text(truthTable);\n  })[\"catch\"](function (error) {\n    console.error('Error: ', error);\n  });\n}\nfunction loadTruthTableToPage() {}\nsubmitButton.on('click', sendFormulaToServer);\n\n//# sourceURL=webpack://boolean-logic-tool/./src/main/resources/static/script/homeScript.ts?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _models_TruthTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models/TruthTable */ \"./src/main/resources/static/script/models/TruthTable.ts\");\n/* provided dependency */ var $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n\nvar functionInput = $(\"#function-input\");\nvar submitButton = $(\"#submit-button\");\nvar truthTableDiv = $(\"#truth-table-div\");\nvar truthTableSection = $(\"#truth-table-section\");\nfunction sendFormulaToServer() {\n  console.log('functionInput: ', functionInput.val());\n  fetch('/formula', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify({\n      formula: functionInput.val()\n    })\n  }).then(function (response) {\n    console.log('response: ', response);\n    loadTruthTableToPage(response);\n  }).then(function (responseJson) {\n    console.log(responseJson);\n  })[\"catch\"](function (error) {\n    console.error('Error: ', error);\n  });\n}\nfunction loadTruthTableToPage(truthTableResponse) {\n  console.log('truthTableResponse: ', truthTableResponse);\n  truthTableResponse.json().then(function (simpleTruthTable) {\n    var truthTable = new _models_TruthTable__WEBPACK_IMPORTED_MODULE_0__.TruthTable(simpleTruthTable);\n    truthTableSection.empty();\n    truthTableSection.append(truthTable.getHtml());\n  });\n}\nsubmitButton.on('click', sendFormulaToServer);\n\n//# sourceURL=webpack://boolean-logic-tool/./src/main/resources/static/script/homeScript.ts?");
+
+/***/ }),
+
+/***/ "./src/main/resources/static/script/models/TruthTable.ts":
+/*!***************************************************************!*\
+  !*** ./src/main/resources/static/script/models/TruthTable.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   TruthTable: () => (/* binding */ TruthTable)\n/* harmony export */ });\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError(\"Cannot call a class as a function\"); }\nfunction _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, \"value\" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }\nfunction _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, \"prototype\", { writable: !1 }), e; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : i + \"\"; }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nvar TruthTable = /*#__PURE__*/function () {\n  function TruthTable(simpleTruthTable) {\n    _classCallCheck(this, TruthTable);\n    this._simpleTruthTable = simpleTruthTable;\n    this.parseSimpleTruthTable();\n  }\n  return _createClass(TruthTable, [{\n    key: \"parseSimpleTruthTable\",\n    value: function parseSimpleTruthTable() {\n      this._numVariables = this._simpleTruthTable.truthTable.numVariables;\n      this._variables = TruthTable.VARIABLES.slice(0, this._numVariables);\n      this._numColumns = this._simpleTruthTable.truthTable.truthTableColumns.length;\n      this._numRows = this._simpleTruthTable.truthTable.truthTableRows.length;\n      this._truthTableBinaryArray = new Array(this._numColumns);\n      for (var i = 0; i < this._numColumns; i++) {\n        this._truthTableBinaryArray[i] = new Array(this._numRows);\n      }\n      for (var _i = 0; _i < this._numColumns; _i++) {\n        for (var j = 0; j < this._numRows; j++) {\n          this._truthTableBinaryArray[_i][j] = this._simpleTruthTable.truthTable.truthTableColumns[_i].binaryColumn[j].binary;\n        }\n      }\n    }\n  }, {\n    key: \"getVariablesHtmlString\",\n    value: function getVariablesHtmlString() {\n      var variablesHtmlString = '';\n      for (var i = 0; i < this._numVariables; i++) {\n        variablesHtmlString += \"\\n                <div class=\\\"variable-div\\\">\\n                    <h4>\".concat(this._variables[i], \"</h4>\\n                </div>\\n                \");\n      }\n      variablesHtmlString += \"\\n            <div class=\\\"variable-div function-cell\\\">\\n                <h4>f</h4>\\n            </div>\\n            \";\n      return variablesHtmlString;\n    }\n  }, {\n    key: \"getVariablesHtml\",\n    value: function getVariablesHtml() {\n      var variablesHtml = document.createElement('div');\n      variablesHtml.classList.add('variables-div');\n      variablesHtml.innerHTML = this.getVariablesHtmlString();\n      return variablesHtml;\n    }\n  }, {\n    key: \"getTruthTableRowHtmlString\",\n    value: function getTruthTableRowHtmlString(rowIndex) {\n      var truthTableRowHtmlString = '';\n      for (var i = 0; i < this._numColumns; i++) {\n        truthTableRowHtmlString += \"\\n                <div class=\\\"truth-table-cell\\\">\\n                    <h4>\".concat(this._truthTableBinaryArray[i][rowIndex], \"</h4>\\n                </div>\\n                \");\n      }\n      truthTableRowHtmlString += \"\\n            <div class=\\\"truth-table-cell function-cell\\\">\\n                <h4>\".concat(this._simpleTruthTable.truthTable.functionColumn.binaryColumn[rowIndex].binary, \"</h4>\\n            </div>\\n            \");\n      return truthTableRowHtmlString;\n    }\n  }, {\n    key: \"getTruthTableRowHtml\",\n    value: function getTruthTableRowHtml(rowIndex) {\n      var truthTableRowHtml = document.createElement('div');\n      truthTableRowHtml.classList.add('truth-table-row');\n      truthTableRowHtml.innerHTML = this.getTruthTableRowHtmlString(rowIndex);\n      return truthTableRowHtml;\n    }\n  }, {\n    key: \"getHtml\",\n    value: function getHtml() {\n      var truthTableHtml = document.createElement('div');\n      truthTableHtml.classList.add('truth-table-div');\n      truthTableHtml.appendChild(this.getVariablesHtml());\n      for (var i = 0; i < this._numRows; i++) {\n        truthTableHtml.appendChild(this.getTruthTableRowHtml(i));\n      }\n      return truthTableHtml;\n    }\n  }, {\n    key: \"simpleTruthTable\",\n    get: function get() {\n      return this._simpleTruthTable;\n    },\n    set: function set(value) {\n      this._simpleTruthTable = value;\n    }\n  }]);\n}();\nTruthTable.VARIABLES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];\n\n//# sourceURL=webpack://boolean-logic-tool/./src/main/resources/static/script/models/TruthTable.ts?");
 
 /***/ }),
 
@@ -66,12 +78,42 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	__webpack_require__("./src/main/resources/static/script/globalScript.ts");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/main/resources/static/script/homeScript.ts");
+/******/ 	__webpack_require__("./src/main/resources/static/script/homeScript.ts");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/main/resources/static/script/models/TruthTable.ts");
 /******/ 	
 /******/ })()
 ;
