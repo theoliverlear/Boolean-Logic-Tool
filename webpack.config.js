@@ -8,7 +8,7 @@ module.exports = {
         './src/main/resources/static/script/homeScript.ts',
 
         // Models
-
+        './src/main/resources/static/script/models/TruthTable.ts',
     ],
     module: {
         rules: [
