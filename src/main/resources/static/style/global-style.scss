@@ -1,0 +1,84 @@
+@import "global-mixins";
+@import "global-functions";
+@import "global-variables";
+@import "global-placeholders";
+h1 {
+    font-size: $h1-font-size;
+    @extend %no-margin-padding;
+}
+h2 {
+    font-size: $h2-font-size;
+    @extend %no-margin-padding;
+}
+h3 {
+    font-size: $h3-font-size;
+    @extend %no-margin-padding;
+}
+h4 {
+    font-size: $h4-font-size;
+    @extend %no-margin-padding;
+}
+h5 {
+    font-size: $h5-font-size;
+    @extend %no-margin-padding;
+}
+h6 {
+    font-size: $h6-font-size;
+    @extend %no-margin-padding;
+}
+p {
+    font-size: $h6-font-size;
+    @extend %no-margin-padding;
+}
+body {
+    font-family: $jetbrains-mono-font;
+    background-color: $alabaster-stone;
+    @include flex(center, center, column);
+    min-height: 100vh;
+    @extend %no-margin-padding;
+    main {
+
+    }
+}
+header {
+    width: 100%;
+    height: calc-size(7, 4, 2);
+    @include flex(center, center, row);
+    background-color: $charcoal;
+}
+.truth-table-div {
+    @include flex(center, center, column);
+    .variables-div {
+        @include flex(center, center, row);
+        border-bottom: $thin-border solid $light-charcoal;
+        .variable-div {
+            padding: 0 $one-percent;
+        }
+    }
+    .truth-table-row {
+        @include flex(center, center, row);
+        //height: 100%;
+        .truth-table-cell {
+            padding: $half-percent $one-percent;
+        }
+    }
+    .function-cell {
+        border-left: $thin-border solid $light-charcoal;
+    }
+}
+footer {
+    border-top: $very-thin-border solid $white-shade;
+    margin-top: auto;
+    background-color: $charcoal;
+    color: $pristine-white;
+    @include flex(center, center, row);
+    width: 100%;
+    height: calc-size(3, 1.25, 1);
+    .footer-item {
+        @include flex(center, center, row);
+        flex: 1;
+        &:first-child {
+            border-right: $thin-border solid $light-charcoal;
+        }
+    }
+}
