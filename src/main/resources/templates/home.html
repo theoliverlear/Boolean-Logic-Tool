@@ -1,34 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Binary Function Tool</title>
-<!--    <link rel="stylesheet" href="../static/style/style.css">-->
+    <link rel="stylesheet" href="../static/style/global-style.css"
+          th:href="@{/style/global-style.css}"/>
+    <link rel="stylesheet" href="../static/style/home-style.css"
+          th:href="@{/style/home-style.css}"/>
 </head>
 <body>
+<header>
+    <nav>
+
+    </nav>
+</header>
 <main>
-    <section>
-        <h1>Binary Function Tool</h1>
-<!--        <h2>Select amount of variables</h2>-->
-<!--        <div id="variable-select-div">-->
-<!--            <select id="variable-select">-->
-<!--                <option class="variable-option" value="1">1</option>-->
-<!--                <option class="variable-option" value="2">2</option>-->
-<!--                <option class="variable-option" value="3">3</option>-->
-<!--                <option class="variable-option" value="4">4</option>-->
-<!--                <option class="variable-option" value="5">5</option>-->
-<!--                <option class="variable-option" value="6">6</option>-->
-<!--                <option class="variable-option" value="7">7</option>-->
-<!--                <option class="variable-option" value="8">8</option>-->
-<!--            </select>-->
-<!--        </div>-->
+    <section id="intro-section">
+        <h2>Binary Function Tool</h2>
+    </section>
+    <section id="input-section">
         <input type="text" id="function-input" placeholder="Enter function">
         <button id="submit-button">Submit</button>
-        <div id="truth-table-div">
+    </section>
+        <div id="formula-title">
 
+            <h3>ABC</h3>
         </div>
+    <section id="truth-table-section">
+<!--        <div class="truth-table-div">-->
+<!--            <div class="variables-div">-->
+<!--                <div class="variable-div">-->
+<!--                    <h4>A</h4>-->
+<!--                </div>-->
+<!--                <div class="variable-div">-->
+<!--                    <h4>B</h4>-->
+<!--                </div>-->
+<!--                <div class="variable-div">-->
+<!--                    <h4>C</h4>-->
+<!--                </div>-->
+<!--                <div class="variable-div function-cell">-->
+<!--                    <h4>f</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>0</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="truth-table-row">-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--                <div class="truth-table-cell function-cell">-->
+<!--                    <h4>1</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </section>
 </main>
+<footer>
+    <div class="footer-item">
+        <h6>&copy 2024 Sigwarth Software</h6>
+    </div>
+    <div class="footer-item">
+        <h6>Terms of Service</h6>
+    </div>
+</footer>
 <script src="../static/script/bundle.js" type="application/javascript"
         th:src="@{/script/bundle.js}"></script>
 </body>
