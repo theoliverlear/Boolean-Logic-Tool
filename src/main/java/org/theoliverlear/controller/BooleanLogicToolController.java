@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.theoliverlear.comm.request.FormulaRequest;
+import org.theoliverlear.comm.response.TruthTableResponse;
 import org.theoliverlear.model.BinaryFormula;
 import org.theoliverlear.model.TruthTable;
 
@@ -16,8 +17,11 @@ public class BooleanLogicToolController {
         return "home";
     }
     @RequestMapping("/formula")
-    public ResponseEntity<TruthTable> formula(@RequestBody FormulaRequest formulaRequest) {
+    public ResponseEntity<TruthTableResponse> formula(@RequestBody FormulaRequest formulaRequest) {
+        System.out.println("Formula Request Formula: " + formulaRequest.getFormula());
         BinaryFormula formula = new BinaryFormula(formulaRequest.getFormula());
-        return new ResponseEntity<>(formula.getTruthTable(), HttpStatus.OK);
+        System.out.println("Formula: " + formula);
+        System.out.println("Truth Table: \n" + formula.getTruthTable());
+        return new ResponseEntity<>(new TruthTableResponse(formula.getTruthTable()), HttpStatus.OK);
     }
 }
