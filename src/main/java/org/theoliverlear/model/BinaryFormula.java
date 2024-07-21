@@ -9,27 +9,23 @@ public class BinaryFormula {
     //============================-Variables-=================================
     String formula;
     int numVariables;
-    boolean isPrime = false;
+    boolean isPrime;
     List<BinaryFormula> subFormulas;
     List<VariableCluster> variableClusters;
     TruthTable truthTable;
     //===========================-Constructors-===============================
     public BinaryFormula(String formula) {
-        this.subFormulas = new ArrayList<>();
-        this.variableClusters = new ArrayList<>();
-        this.formula = formatFormula(formula);
-        this.numVariables = this.formulaVariableCount();
-        this.truthTable = new TruthTable(this.numVariables);
-        this.findVariableClusters();
+        this(formula, false);
     }
     public BinaryFormula(String formula, boolean isPrime) {
+        this.isPrime = isPrime;
+        this.formula = formatFormula(formula);
         this.variableClusters = new ArrayList<>();
         this.subFormulas = new ArrayList<>();
-        this.formula = formatFormula(formula);
-        this.isPrime = isPrime;
         this.numVariables = this.formulaVariableCount();
         this.truthTable = new TruthTable(this.numVariables);
         this.findVariableClusters();
+        this.buildTruthTable();
     }
     //=============================-Methods-==================================
     public static String formatFormula(String formula) {
@@ -159,7 +155,7 @@ public class BinaryFormula {
         }
         this.variableClusters = variableClusters;
     }
-    public List<Binary> getFullFormulaBinary() {
+    public BinaryColumn getFullFormulaBinary() {
         List<BinaryRow> binaryRows = this.truthTable.getTruthTableRows();
         List<Binary> finalBinaryDigits = new ArrayList<>();
         List<BinaryFormula> formulas = new ArrayList<>();
@@ -232,7 +228,10 @@ public class BinaryFormula {
         BinaryColumn finalBinaryColumn = new BinaryColumn(finalBinaryDigits);
         TruthTable finalTruthTable = new TruthTable(this.numVariables, finalBinaryColumn);
         System.out.println(finalTruthTable);
-        return finalBinaryDigits;
+        return finalBinaryColumn;
+    }
+    public void buildTruthTable() {
+        this.truthTable = new TruthTable(this.numVariables, this.getFullFormulaBinary());
     }
     public void simplifyFormula() {
 
@@ -247,11 +246,17 @@ public class BinaryFormula {
         System.out.println(binaryFormula);
         System.out.println(binaryFormula.getFullFormulaBinary());
         System.out.println("-".repeat(10));
-        BinaryFormula binaryFormula2 = new BinaryFormula("D'+AC");
+//        BinaryFormula binaryFormula2 = new BinaryFormula("D'+AC");
+        BinaryFormula binaryFormula2 = new BinaryFormula("ABC");
         binaryFormula2.findVariableClusters();
         System.out.println(binaryFormula2);
         System.out.println(binaryFormula2.getFullFormulaBinary());
         System.out.println(binaryFormula.getFullFormulaBinary().equals(binaryFormula2.getFullFormulaBinary()));
-
+        System.out.println(binaryFormula2.getTruthTable().getTruthTableColumns().size());
+        BinaryFormula binaryFormula3 = new BinaryFormula("BCD");
+        binaryFormula2.findVariableClusters();
+        System.out.println(binaryFormula3);
+        System.out.println(binaryFormula3.getFullFormulaBinary());
+        System.out.println(binaryFormula3.getTruthTable().getTruthTableColumns().size());
     }
 }
