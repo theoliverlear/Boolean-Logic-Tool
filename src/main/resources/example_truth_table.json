@@ -1,0 +1,233 @@
+{
+  "truthTable": {
+    "numVariables": 3,
+    "truthTableColumns": [
+      {
+        "numVariables": 3,
+        "positionFromLast": 2,
+        "binaryColumn": [
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          }
+        ]
+      },
+      {
+        "numVariables": 3,
+        "positionFromLast": 1,
+        "binaryColumn": [
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          }
+        ]
+      },
+      {
+        "numVariables": 3,
+        "positionFromLast": 0,
+        "binaryColumn": [
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          }
+        ]
+      }
+    ],
+    "truthTableRows": [
+      {
+        "binaryRow": [
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          }
+        ]
+      },
+      {
+        "binaryRow": [
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          }
+        ]
+      },
+      {
+        "binaryRow": [
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          }
+        ]
+      },
+      {
+        "binaryRow": [
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          }
+        ]
+      },
+      {
+        "binaryRow": [
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "0"
+          }
+        ]
+      },
+      {
+        "binaryRow": [
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          },
+          {
+            "binary": "1"
+          }
+        ]
+      },
+      {
+        "binaryRow": [
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "0"
+          }
+        ]
+      },
+      {
+        "binaryRow": [
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          },
+          {
+            "binary": "1"
+          }
+        ]
+      }
+    ],
+    "functionColumn": {
+      "numVariables": 0,
+      "positionFromLast": 0,
+      "binaryColumn": [
+        {
+          "binary": "0"
+        },
+        {
+          "binary": "1"
+        },
+        {
+          "binary": "1"
+        },
+        {
+          "binary": "1"
+        },
+        {
+          "binary": "1"
+        },
+        {
+          "binary": "1"
+        },
+        {
+          "binary": "1"
+        },
+        {
+          "binary": "1"
+        }
+      ]
+    }
+  }
+}
