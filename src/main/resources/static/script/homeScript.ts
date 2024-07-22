@@ -1,7 +1,7 @@
 import {TruthTable} from "./models/TruthTable";
 
 const functionInput: JQuery<HTMLElement> = $("#function-input");
-const submitButton: JQuery<HTMLElement> = $("#submit-button");
+const submitButton: JQuery<HTMLElement> = $("#submit-button-div");
 const truthTableSection: JQuery<HTMLElement> = $("#truth-table-section");
 const formulaTitleText: JQuery<HTMLElement> = $("#formula-title-text");
 
