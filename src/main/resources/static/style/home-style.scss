@@ -1,0 +1,28 @@
+@import "global-mixins";
+@import "global-functions";
+@import "global-variables";
+@import "global-placeholders";
+
+#intro-section {
+    margin: $one-percent 0 0 0;
+}
+#truth-table-section {
+    @include flex(center, center, column);
+    #example-table-div {
+        color: $lightest-charcoal;
+        .truth-table-div {
+            .variables-div {
+                border-bottom: $thin-border solid $lightest-charcoal;
+            }
+            .function-cell {
+                border-left: $thin-border solid $lightest-charcoal;
+            }
+        }
+    }
+}
+#input-section {
+    @include flex(center, center, row);
+    #submit-button-div {
+        margin: $half-percent
+    }
+}
