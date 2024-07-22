@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.theoliverlear.comm.request.FormulaRequest;
 import org.theoliverlear.comm.response.TruthTableResponse;
 import org.theoliverlear.model.BinaryFormula;
-import org.theoliverlear.model.TruthTable;
 
 @Controller
 public class BooleanLogicToolController {
