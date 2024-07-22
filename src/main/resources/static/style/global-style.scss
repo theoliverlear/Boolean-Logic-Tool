@@ -37,7 +37,7 @@ body {
     min-height: 100vh;
     @extend %no-margin-padding;
     main {
-
+        @include flex(center, center, column);
     }
 }
 header {
@@ -65,6 +65,22 @@ header {
     .function-cell {
         border-left: $thin-border solid $light-charcoal;
     }
+}
+input {
+    font-family: $jetbrains-mono-font;
+    font-size: $p-font-size;
+    color: $pristine-white;
+    background-color: $charcoal;
+    border: $thin-border solid $light-charcoal;
+    padding: $half-percent $one-percent;
+    @extend %soft-border-curve;
+}
+.button {
+    color: $pristine-white;
+    background-color: $charcoal;
+    padding: $half-percent $one-percent;
+    border: $thin-border solid $pristine-white;
+    @extend %soft-border-curve;
 }
 footer {
     border-top: $very-thin-border solid $white-shade;
