@@ -7,7 +7,7 @@ export class TruthTable {
     private _numColumns: number;
     private _numRows: number;
     private _truthTableBinaryArray: string[][];
-    public static readonly VARIABLES: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',];
+    public static readonly VARIABLES: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     constructor(simpleTruthTable: SimpleTruthTable) {
         this._simpleTruthTable = simpleTruthTable;
         this.parseSimpleTruthTable();
